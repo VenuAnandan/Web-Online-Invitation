@@ -280,10 +280,12 @@
 /* ── Default card background images ── */
 .reception-card {
   background: url('/download (3).jpg') center / cover no-repeat;
+  content-visibility: auto;
 }
 
 .marriage-card {
   background: url('/download (2).jpg') center / cover no-repeat;
+  content-visibility: auto;
 }
 
 /* ── Shared photo-card background transition ── */
@@ -302,11 +304,11 @@
 }
 
 .reception-card::before {
-  background-image: url('/Reception.png');
+  background-image: url('/Reception.webp');
 }
 
 .marriage-card::before {
-  background-image: url('/Marriage.png');
+  background-image: url('/Marriage.webp');
 }
 
 .reception-card:hover::before,

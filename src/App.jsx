@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div className="page">
-      <img src="/Gemini_Generated1.png" className="wedding-bg" alt="" />
+      <img src="/Gemini_Generated1.webp" className="wedding-bg" alt="" fetchPriority="high" decoding="async" />
 
       <div className="all-overlays">
 
