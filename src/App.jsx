@@ -3,24 +3,23 @@ import './App.css'
 
 function App() {
   const [timeLeft, setTimeLeft] = useState({ days: '00', hours: '00', minutes: '00', seconds: '00' })
-  const [playing, setPlaying] = useState(false)
   const audioRef = useRef(null)
 
   useEffect(() => {
-    const tryPlay = () => {
-      if (audioRef.current && !playing) {
-        audioRef.current.play().then(() => setPlaying(true)).catch(() => {})
-      }
-      document.removeEventListener('click', tryPlay)
-      document.removeEventListener('touchstart', tryPlay)
+    const audio = audioRef.current
+    if (!audio) return
+    const play = () => { audio.play().catch(() => {}) }
+    // try immediately (works on desktop)
+    play()
+    // fallback: start on first any user gesture (required by iOS/Android)
+    const events = ['touchstart', 'touchend', 'click', 'scroll', 'keydown']
+    const onGesture = () => {
+      play()
+      events.forEach(e => document.removeEventListener(e, onGesture))
     }
-    document.addEventListener('click', tryPlay)
-    document.addEventListener('touchstart', tryPlay)
-    return () => {
-      document.removeEventListener('click', tryPlay)
-      document.removeEventListener('touchstart', tryPlay)
-    }
-  }, [playing])
+    events.forEach(e => document.addEventListener(e, onGesture, { once: true }))
+    return () => events.forEach(e => document.removeEventListener(e, onGesture))
+  }, [])
   // const [birds, setBirds] = useState([])
 
   useEffect(() => {
@@ -181,7 +180,7 @@ function App() {
         <img src="/Invitation.jpeg" className="invitation-img" alt="Wedding Invitation" />
       </div>
 
-      <audio ref={audioRef} src="/flute.mp3" loop preload="none" />
+      <audio ref={audioRef} src="/flute.mp3" loop preload="auto" />
 
       <div className="mickey-wrap">
         <img src="/mickey-mouse-gif-4.gif" className="mickey-gif" alt="" />
