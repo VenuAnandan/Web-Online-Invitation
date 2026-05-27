@@ -60,8 +60,7 @@ function App() {
           <h1 className="couple-names">Janarthanan <span className="ampersand">&amp;</span> Nithyasree</h1>
           <div className="divider" />
 
-          <p className="event-details">June 04, 2026 · 07:30 AM To 09:00 · Saroja Sanmugam Thirumana Mandapam</p>
-          <p className="tagline">WE ARE GETTING MARRIED!</p>
+<p className="tagline">WE ARE GETTING MARRIED!</p>
           <p className="description">Please join us for this celebration and come bless our union.</p>
 
           <div className="countdown">
@@ -108,6 +107,21 @@ function App() {
               </div>
             </div>
 
+            <div className="card nagavalli-card">
+              <div className="card-front">
+                <p className="title">Nagavalli Muhurtham</p>
+                <p className="subtitle">Sacred Ritual</p>
+              </div>
+              <div className="card-back nagavalli-back">
+                <div className="reception-info">
+                  <p>June 04, 2026</p>
+                  <p>11:00 AM – 12:00 PM</p>
+                  <p>Saroja Sanmugam</p>
+                  <p>Thirumana Mandapam</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -147,6 +161,12 @@ function App() {
         </div>
 
       </div>
+
+      <div className="invitation-footer">
+        <img src="/Invitation.jpeg" className="invitation-img" alt="Wedding Invitation" />
+      </div>
+
+      <img src="/mickey-mouse-gif-4.gif" className="mickey-gif" alt="" />
 
       {/* birds temporarily disabled
       {birds.map(bird => (

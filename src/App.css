@@ -57,8 +57,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 40%;
-  /* margin-right: auto; */
+  margin-left: 10%;
+  align-self: flex-end;
 }
 
 .verse-block {
@@ -172,6 +172,13 @@
 }
 
 /* ── Celebration section ── */
+.celebration-container,
+.map-container {
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .celebration-container {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(2px);
@@ -288,9 +295,34 @@
   content-visibility: auto;
 }
 
+/* ── Nagavalli card ── */
+.nagavalli-card {
+  background: url('/images (11).jpg') center / cover no-repeat;
+  content-visibility: auto;
+}
+
+.nagavalli-card::before {
+  background-image: url('/download (5).jpg');
+}
+
+.nagavalli-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  transform: translateX(120%);
+  position: relative;
+  z-index: 1;
+}
+
+.nagavalli-card:hover .nagavalli-back {
+  transform: translateX(0);
+}
+
 /* ── Shared photo-card background transition ── */
 .reception-card::before,
-.marriage-card::before {
+.marriage-card::before,
+.nagavalli-card::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -312,7 +344,8 @@
 }
 
 .reception-card:hover::before,
-.marriage-card:hover::before {
+.marriage-card:hover::before,
+.nagavalli-card:hover::before {
   opacity: 1;
 }
 
@@ -482,12 +515,29 @@
   }
 
   .all-overlays {
+    position: relative;
     padding: 16px 8px 24px;
     gap: 12px;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     width: 100%;
     text-align: center;
+  }
+
+  .hero-card {
+    align-self: flex-end;
+  }
+
+  .invitation-footer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .invitation-img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .celebration-container,
@@ -602,11 +652,25 @@
   }
 
   .card .title {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .card .subtitle {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+  }
+
+  .nagavalli-card {
+    width: 80vw;
+    max-width: 300px;
+    height: 220px;
+  }
+
+  .nagavalli-back {
+    transform: translateX(120%);
+  }
+
+  .nagavalli-card:hover .nagavalli-back {
+    transform: translateX(0);
   }
 
   /* ── Container 3 ── */
@@ -704,11 +768,76 @@
   .celebration-title,
   .map-title { font-size: 20px; }
 
-  .card {
+  .card,
+  .nagavalli-card {
     width: 82vw;
     height: 190px;
   }
 
   .map-frame  { height: 150px; }
   .map-qr     { width: 90px; height: 90px; }
+}
+
+/* ── Invitation footer ── */
+.invitation-footer {
+  width: 100%;
+  line-height: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.invitation-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Mickey Mouse GIF ── */
+.mickey-gif {
+  position: fixed;
+  bottom: 0;
+  right: 16px;
+  width: 220px;
+  height: auto;
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .mickey-gif {
+    width: 280px;
+    right: 32px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .mickey-gif {
+    width: 220px;
+    right: 20px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .mickey-gif {
+    width: 150px;
+    right: 10px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 390px) {
+  .mickey-gif {
+    width: 120px;
+    right: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .invitation-img {
+    width: 100%;
+    height: auto;
+  }
 }
