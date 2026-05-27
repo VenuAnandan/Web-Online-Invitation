@@ -1,8 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
 function App() {
   const [timeLeft, setTimeLeft] = useState({ days: '00', hours: '00', minutes: '00', seconds: '00' })
+  const [playing, setPlaying] = useState(false)
+  const audioRef = useRef(null)
+
+  useEffect(() => {
+    const tryPlay = () => {
+      if (audioRef.current && !playing) {
+        audioRef.current.play().then(() => setPlaying(true)).catch(() => {})
+      }
+      document.removeEventListener('click', tryPlay)
+      document.removeEventListener('touchstart', tryPlay)
+    }
+    document.addEventListener('click', tryPlay)
+    document.addEventListener('touchstart', tryPlay)
+    return () => {
+      document.removeEventListener('click', tryPlay)
+      document.removeEventListener('touchstart', tryPlay)
+    }
+  }, [playing])
   // const [birds, setBirds] = useState([])
 
   useEffect(() => {
@@ -86,8 +104,7 @@ function App() {
                 <div className="reception-info">
                   <p>June 03, 2026</p>
                   <p>06:00 PM – 10:00 PM</p>
-                  <p>Saroja Sanmugam</p>
-                  <p>Thirumana Mandapam</p>
+                  <p>Saroja Sanmugam Thirumana Mandapam, Santhavasal</p>
                 </div>
               </div>
             </div>
@@ -101,8 +118,7 @@ function App() {
                 <div className="reception-info">
                   <p>June 04, 2026</p>
                   <p>07:30 AM – 09:00 AM</p>
-                  <p>Saroja Sanmugam</p>
-                  <p>Thirumana Mandapam</p>
+                  <p>Saroja Sanmugam Thirumana Mandapam, Santhavasal</p>
                 </div>
               </div>
             </div>
@@ -116,8 +132,7 @@ function App() {
                 <div className="reception-info">
                   <p>June 04, 2026</p>
                   <p>11:00 AM – 12:00 PM</p>
-                  <p>Saroja Sanmugam</p>
-                  <p>Thirumana Mandapam</p>
+                  <p>Saroja Sanmugam Thirumana Mandapam, Santhavasal</p>
                 </div>
               </div>
             </div>
@@ -166,7 +181,12 @@ function App() {
         <img src="/Invitation.jpeg" className="invitation-img" alt="Wedding Invitation" />
       </div>
 
-      <img src="/mickey-mouse-gif-4.gif" className="mickey-gif" alt="" />
+      <audio ref={audioRef} src="/flute.mp3" loop preload="none" />
+
+      <div className="mickey-wrap">
+        <img src="/mickey-mouse-gif-4.gif" className="mickey-gif" alt="" />
+        <p className="mickey-text">Also I'm here at night</p>
+      </div>
 
       {/* birds temporarily disabled
       {birds.map(bird => (
